@@ -1,10 +1,4 @@
-// PSP includes
-#include <pspkernel.h>
-#include <pspdebug.h>
-// #include <>
-
-// Load Module
-PSP_MODULE_INFO("PRENDAAA",0,1,0); // Version 1.0
+#include "01_psp_boot.hpp"
 
 // Home button Callback
 int exitCallback(int arg1, int arg2, void *common)
@@ -35,18 +29,4 @@ void setupCallbacks()
   {
     sceKernelStartThread(thid,0,nullptr);
   }
-}
-
-auto main() -> int
-{
-  // Home button callback
-  setupCallbacks();
-
-  // Start Debug Screen
-  pspDebugScreenInit();
-
-  // Printf in Debug Sreen
-  pspDebugScreenPrintf("Boas mpts bros\n");
-
-  
 }

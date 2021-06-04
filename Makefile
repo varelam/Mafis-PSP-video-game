@@ -1,5 +1,9 @@
 TARGET = PRENDAAA
-OBJS = main.o\
+OBJS = 00_main.o\
+01_psp_boot.o \
+02_start.o \
+03_intro.o \
+graph.o
 
 CFLAGS =
 CXXFLAGS = $(CFLAGS) -std=c++14 -fno-rtti

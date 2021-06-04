@@ -1,0 +1,7 @@
+#define SCREEN_WIDTH 480
+#define SCREEN_HEIGHT 270
+
+// Colors
+#define BLUE_LIGHT 0xFFFFCA82
+
+#define YELLOW 0xFF00FFFF
