@@ -1,0 +1,25 @@
+# -------------- Ignore everything
+/*
+
+# -------------- But do not ignore:
+
+# Get all file formats:
+!.c
+!.cpp
+!.h
+!.hpp
+
+# Don't ignore all stuff in media folder
+!media/
+
+# Don't ignore binary executable
+!EBOOT.PSP
+
+# Don't ignore README
+!REAME.md
+
+# Don't ignore makefile
+!Makefile
+
+# Don't ignore self
+!.gitignore

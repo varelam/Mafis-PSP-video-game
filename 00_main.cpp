@@ -2,6 +2,11 @@
 #include <pspkernel.h>
 #include <pspdebug.h>
 
+/* // Sound
+#include <pspaudio.h>
+#include <pspaudiolib.h>
+#include <psppower.h> */
+
 // Load Module
 PSP_MODULE_INFO("PRENDAAA",0,1,0); // Version 1.0
 
@@ -26,10 +31,10 @@ auto main() -> int
 
   // Start of the game print
   // State02();
-  
+
   // Screen begins, lots of pink
   graph::init();
   State03();
 
-  return 0;
+  sceKernelExitGame();	
 }

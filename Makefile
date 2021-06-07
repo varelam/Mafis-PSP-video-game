@@ -3,11 +3,12 @@ OBJS = 00_main.o\
 01_psp_boot.o \
 02_start.o \
 03_intro.o \
-graph.o
+graph.o \
 
 CFLAGS =
 CXXFLAGS = $(CFLAGS) -std=c++14 -fno-rtti
 ASFLAGS =  $(CFLAGS)
+
 
 # PSP Stuff
 BUILD_PRX = 1
@@ -16,7 +17,10 @@ PSP_LARGE_MEMORY = 1
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = PRENDAAA
-# PSP_EBOOT_ICON = ICON0.PNG # 144x80 image!
+
+PSP_EBOOT_ICON= "media/icon0.png" # 144x80 image!
+PSP_EBOOT_PIC1= "media/background0.png" # 480 x 270
+PSP_EBOOT_SND0= "media/intro.at3"
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 
