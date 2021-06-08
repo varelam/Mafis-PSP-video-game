@@ -23,7 +23,7 @@ void State02()
     pspDebugScreenPrintf("MUAHAHAHAHAHAH!\n\n");
     sleep(3);
 
-    pspDebugScreenPrintf("Bem, ate jaaaaaaaaaaaaaa\n\n\n\n");
+    pspDebugScreenPrintf("Bem, ate jaaaaaaaaaaaaaaa\n\n\n\n");
     sleep(3);
 
     pspDebugScreenPrintf("(Prime x para avançar tho...)\n\n");

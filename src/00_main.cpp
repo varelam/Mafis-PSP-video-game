@@ -30,7 +30,7 @@ auto main() -> int
   pspDebugScreenInit();
 
   // Start of the game print
-  // State02();
+  State02();
 
   // Screen begins, lots of pink
   graph::init();

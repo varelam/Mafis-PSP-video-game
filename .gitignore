@@ -9,8 +9,14 @@
 !.h
 !.hpp
 
+# Don't ignore all stuff in src folder
+!src/
+
 # Don't ignore all stuff in media folder
 !media/
+
+# Don't ignore all stuff in bin folder
+!bin/
 
 # Don't ignore binary executable
 !EBOOT.PSP
