@@ -8,25 +8,28 @@ void State02()
     // Delay a bit for suspanse
     sleep(3);
 
-    pspDebugScreenPrintf("Preparei um pequeno jogo para ti, \nnao podes simplesmente 'ter' uma prenda ...\n\n");
+    pspDebugScreenPrintf("Preparei um pequeno jogo para ti, \nnao podes simplesmente 'ter' uma prenda ...\n\n\n");
     sleep(3);
 
     pspDebugScreenPrintf("Imagina, receber prendas do namorado sem dar nada em troca...\n\n\n\n");
     sleep(3);
 
-    pspDebugScreenPrintf("RUDE\n\n\n\n");
+    pspDebugScreenPrintf("\t\t\t\t\tRUDE\n\n\n\n");
     sleep(3);
 
-    pspDebugScreenPrintf("Espero que te divirtas, pois eu vou divertir-me muito...\n\n");
+    pspDebugScreenPrintf("Conto contigo para passares este jogo, senao nao ha prenda...\n\n\n");
     sleep(3);
 
-    pspDebugScreenPrintf("MUAHAHAHAHAHAH!\n\n");
+    pspDebugScreenPrintf("Espero que te divirtas, pois eu vou divertir-me muito...\n\n\n");
+    sleep(3);
+
+    pspDebugScreenPrintf("\t\t\t\tMUAHAHAHAHAHAH!\n\n\n");
     sleep(3);
 
     pspDebugScreenPrintf("Bem, ate jaaaaaaaaaaaaaaa\n\n\n\n");
     sleep(3);
 
-    pspDebugScreenPrintf("(Prime x para avançar tho...)\n\n");
+    pspDebugScreenPrintf("(Prime x para continuar tho...\(\^\^ \"\))\n\n");
 
     // Initiate controls
     sceCtrlSetSamplingCycle(0);
