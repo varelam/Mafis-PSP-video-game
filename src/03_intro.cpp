@@ -1,55 +1,87 @@
 #include "03_intro.hpp"
 
-void State03()
+void State03(player * myPlayer_ptr)
 {
-    graph::clear(BLUE_LIGHT);
-    graph::drawRect(50,50,50,50,YELLOW);
-    graph::swapBuffers();
+    // Create a player
+    player myPlayer = *myPlayer_ptr;
+    int bodyIdx = 0;
+    int bodyColors[6] = {15,3,2,3,10,0};
+    myPlayer.updateColor(bodyColors);
 
+    // Printf in Debug Sreen
+    pspDebugScreenPrintf("Vamos comecar por personalizar o teu jogador!\n");
+    pspDebugScreenPrintf("Usa as setas para escolher a cor, prime X para avancar!\n");
+    graph::clearKeep(20, BLUE_LIGHT);
+    myPlayer.draw(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 + 80, 1);
+    graph::swapBuffers();
+    
+    
+    struct timespec delay;
+    delay.tv_sec = 0;
+    delay.tv_nsec = 5e8;
+
+    while(bodyIdx<6)
+    {
+        // Read commands
+        SceCtrlData ctrlData;
+
+        bool b_exit = false;
+
+        while(!b_exit)
+        {
+            // Read buttons
+            sceCtrlReadBufferPositive(&ctrlData, 1);
+
+            // Select cross
+            if(ctrlData.Buttons & PSP_CTRL_CROSS) // Go further
+            {
+                bodyIdx++;
+                b_exit = true;
+            }
+            else if(ctrlData.Buttons & PSP_CTRL_CIRCLE) // Go back
+            {
+                bodyIdx--;
+                if(bodyIdx<0){bodyIdx=0;}
+                b_exit = true;
+            }
+            else if(ctrlData.Buttons & PSP_CTRL_RIGHT) // Change color +
+            {
+                bodyColors[bodyIdx] = bodyColors[bodyIdx] + 1;
+                if(bodyColors[bodyIdx]>NUM_COLORS-1){bodyColors[bodyIdx] = 0;}
+                b_exit = true;
+            }
+            else if(ctrlData.Buttons & PSP_CTRL_LEFT) // Change color -
+            {   
+                bodyColors[bodyIdx] = bodyColors[bodyIdx] - 1;
+                if(bodyColors[bodyIdx]<0){bodyColors[bodyIdx] = NUM_COLORS-1;}
+                b_exit = true;
+            }
+            else
+            {
+                b_exit = false;
+            }
+        }
+        
+        myPlayer.updateColor(bodyColors);
+        graph::swapBuffers();
+        graph::clearKeep(20, BLUE_LIGHT);
+        myPlayer.draw(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 + 80, 1);
+        graph::swapBuffers();
+        
+	    nanosleep(&delay, NULL);
+    }
+
+    pspDebugScreenClear();
+    graph::swapBuffers();
+    graph::clearKeep(20, BLUE_LIGHT);
+    myPlayer.draw(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 + 80, 1);
+    graph::swapBuffers();
+    pspDebugScreenPrintf("Estamos prontos para a nossa ventura!\n");
+
+    sleep(3);
     sceDisplayWaitVblankStart();
-
-    sleep(3);
-
-    graph::drawRect(20,150,20,100,YELLOW_LIGHT);
-    graph::swapBuffers();
-    sleep(3);
-
-    graph::drawRect(20,150,20,100,RED);
-    graph::swapBuffers();
-    sleep(3);
-
-    graph::drawRect(120,150,20,130,RED_LIGHT);
-    graph::swapBuffers();
-    sleep(3);
-
-    graph::drawRect(220,150,650,100,PINK);
-    graph::swapBuffers();
-    sleep(3);
-
-    graph::drawRect(420,450,270,10,PINK_LIGHT);
-    graph::swapBuffers();
-    sleep(3);
-
-    graph::drawRect(50,450,230,130,ORANGE);
-    graph::swapBuffers();
-    sleep(3);
-
-    graph::drawRect(220,250,250,200,PURPLE);
-    graph::swapBuffers();
-    sleep(3);
-
-    graph::drawRect(320,10,20,300,GREEN_LIGHT);
-    graph::swapBuffers();
-    sleep(3);
-
-    graph::drawRect(20,150,20,20,GREEN);
-    graph::swapBuffers();
-    sleep(3);
-
-    
-
-    
-
-    
+    // Scaled down
+    // myPlayer.draw(SCREEN_WIDTH - 150, SCREEN_HEIGHT - 80,4);
+    // sleep(5);
     return;
 }

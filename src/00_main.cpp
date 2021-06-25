@@ -2,24 +2,20 @@
 #include <pspkernel.h>
 #include <pspdebug.h>
 
-/* // Sound
-#include <pspaudio.h>
-#include <pspaudiolib.h>
-#include <psppower.h> */
-
 // Load Module
 PSP_MODULE_INFO("PRENDAAA",0,1,0); // Version 1.0
 
 // C++ includes
 #include <unistd.h> // sleep
+#include <cstdint>
 
 // Project
 #include "mafis.hpp"
+#include "player.hpp"
 #include "graph.hpp"
 #include "01_psp_boot.hpp"
 #include "02_start.hpp"
 #include "03_intro.hpp"
-
 
 auto main() -> int
 {
@@ -29,12 +25,19 @@ auto main() -> int
   // Start Debug Screen
   pspDebugScreenInit();
 
+  // Initiate controls
+  sceCtrlSetSamplingCycle(0);
+  sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
+
   // Start of the game print
-  State02();
+  // State02();
+
+  // Create a player
+  player myPlayer(0,0,0,0,0,0);
 
   // Screen begins, lots of pink
   graph::init();
-  State03();
+  State03(&myPlayer);
 
   sceKernelExitGame();	
 }

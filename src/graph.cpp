@@ -22,6 +22,13 @@ namespace graph
         }
     }
     
+    void clearKeep(uint32_t off, uint32_t color)
+    {
+        for(int i = 512*off; i< 512 * SCREEN_HEIGHT; i++)
+        {
+            draw_buffer[i] = color;
+        }
+    }
     void swapBuffers()
     {
         uint32_t* temp = display_buffer;

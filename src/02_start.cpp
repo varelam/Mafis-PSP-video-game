@@ -31,9 +31,7 @@ void State02()
 
     pspDebugScreenPrintf("(Prime x para continuar tho...\(\^\^ \"\))\n\n");
 
-    // Initiate controls
-    sceCtrlSetSamplingCycle(0);
-    sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
+    
 
     SceCtrlData ctrlData;
 

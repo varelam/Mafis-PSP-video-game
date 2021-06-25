@@ -1,30 +1,39 @@
+#ifndef __MAFIS__
+#define __MAFIS__
+
 #define SCREEN_WIDTH 480
 #define SCREEN_HEIGHT 270
 
+#include <cstdint>
+
 // Colors
-#define RED 0x8E030A
-#define RED_LIGHT 0xFF2512
+#define RED 0x0A038E
+#define RED_LIGHT 0x1225FF
 
-#define PINK 0xFFCFD4
-#define PINK_LIGHT 0xFFCFD4
+#define PINK 0xBA75FF
+#define PINK_LIGHT 0xDBBAFF
 
-#define ORANGE 0xFFA700
+#define ORANGE 0x00A7FF
 
-#define YELLOW 0xFF00FFFF
-#define YELLOW_LIGHT 0xFFEC8B
+#define YELLOW 0x0AFCFC
+#define YELLOW_LIGHT 0x8BECFF
 
-#define BROWN 0x782E12
+#define BROWN 0x003F7F
 
-#define GREEN 0x157F40
-#define GREEN_LIGHT 0x81FFB9
+#define GREEN 0x407F15
+#define GREEN_LIGHT 0xB9FF81
 
-#define BLUE 0x395BB1
-#define BLUE_LIGHT 0x78AEFF
+#define BLUE 0xB15B39
+#define BLUE_LIGHT 0xFFAE78
 
-#define PURPLE 0xAB30F7
+#define PURPLE 0xF730AB
 
 #define GREY 0x545454
 #define GREY_LIGHT 0xB4B4B4
 
 #define BLACK 0x000000
 #define WHITE 0xFFFFFF
+
+#define NUM_COLORS 17
+
+#endif
