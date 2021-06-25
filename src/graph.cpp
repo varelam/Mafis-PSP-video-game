@@ -29,6 +29,7 @@ namespace graph
             draw_buffer[i] = color;
         }
     }
+
     void swapBuffers()
     {
         uint32_t* temp = display_buffer;

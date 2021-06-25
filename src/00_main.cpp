@@ -16,6 +16,7 @@ PSP_MODULE_INFO("PRENDAAA",0,1,0); // Version 1.0
 #include "01_psp_boot.hpp"
 #include "02_start.hpp"
 #include "03_intro.hpp"
+#include "04_levelFDUP.hpp"
 
 auto main() -> int
 {
@@ -35,9 +36,12 @@ auto main() -> int
   // Create a player
   player myPlayer(0,0,0,0,0,0);
 
-  // Screen begins, lots of pink
+  // Screen begins
   graph::init();
-  State03(&myPlayer);
+
+  // Levels!
+  State03(myPlayer);
+  /// State04(myPlayer);
 
   sceKernelExitGame();	
 }

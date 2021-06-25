@@ -1,24 +1,24 @@
 #include "03_intro.hpp"
 
-void State03(player * myPlayer_ptr)
+void State03(player &myPlayer)
 {
-    // Create a player
-    player myPlayer = *myPlayer_ptr;
     int bodyIdx = 0;
     int bodyColors[6] = {15,3,2,3,10,0};
+    uint32_t xii = SCREEN_WIDTH/2;
+    uint32_t yii = SCREEN_HEIGHT/2 + 80;
     myPlayer.updateColor(bodyColors);
 
     // Printf in Debug Sreen
     pspDebugScreenPrintf("Vamos comecar por personalizar o teu jogador!\n");
-    pspDebugScreenPrintf("Usa as setas para escolher a cor, prime X para avancar!\n");
+    pspDebugScreenPrintf("Usa as setas para escolher a cor, prime X para avancar!");
     graph::clearKeep(20, BLUE_LIGHT);
-    myPlayer.draw(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 + 80, 1);
+    myPlayer.draw(xii,yii,1);
     graph::swapBuffers();
     
     
     struct timespec delay;
     delay.tv_sec = 0;
-    delay.tv_nsec = 5e8;
+    delay.tv_nsec = 3e8;
 
     while(bodyIdx<6)
     {
@@ -37,6 +37,7 @@ void State03(player * myPlayer_ptr)
             {
                 bodyIdx++;
                 b_exit = true;
+                pspDebugScreenPrintf(".");
             }
             else if(ctrlData.Buttons & PSP_CTRL_CIRCLE) // Go back
             {
@@ -65,7 +66,7 @@ void State03(player * myPlayer_ptr)
         myPlayer.updateColor(bodyColors);
         graph::swapBuffers();
         graph::clearKeep(20, BLUE_LIGHT);
-        myPlayer.draw(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 + 80, 1);
+        myPlayer.draw(xii, yii, 1);
         graph::swapBuffers();
         
 	    nanosleep(&delay, NULL);
@@ -76,12 +77,50 @@ void State03(player * myPlayer_ptr)
     graph::clearKeep(20, BLUE_LIGHT);
     myPlayer.draw(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 + 80, 1);
     graph::swapBuffers();
-    pspDebugScreenPrintf("Estamos prontos para a nossa ventura!\n");
-
-    sleep(3);
+    pspDebugScreenPrintf("Estamos prontos para a nossa aventura!\n");
+    sleep(2);
+    pspDebugScreenPrintf("Tomei a liberdade de te criar um perfil no Tinder... \nPode dar mais jeito no futuro:\n");
+    sleep(2);
+    pspDebugScreenClear();
     sceDisplayWaitVblankStart();
-    // Scaled down
-    // myPlayer.draw(SCREEN_WIDTH - 150, SCREEN_HEIGHT - 80,4);
-    // sleep(5);
+
+    delay.tv_nsec = 1e7;
+    for (int i=0;i<50;i++) // Slide right for style
+    {
+        xii++;
+        // graph::clearKeep(20, BLUE_LIGHT);
+        graph::clear(BLUE_LIGHT);
+        myPlayer.draw(xii, yii, 1);
+        graph::swapBuffers();
+        nanosleep(&delay, NULL);
+    }
+    sleep(1);
+    pspDebugScreenPrintf("O MEU PERFIL:\n\n\n\n");
+
+    pspDebugScreenPrintf("IDADE:\t22\n\n");
+
+    pspDebugScreenPrintf("SIGNO SOLAR:\n");
+    pspDebugScreenPrintf("Caranguejo\n\n");
+
+    pspDebugScreenPrintf("INTERESSES:\n");
+    pspDebugScreenPrintf("Astrologia\n");
+    pspDebugScreenPrintf("Meninos de Engenharia\n");
+    pspDebugScreenPrintf("Magoar fachos\n");
+    pspDebugScreenPrintf("Gatinhos\n\n");
+
+    pspDebugScreenPrintf("SPOTIFY:\n");
+    pspDebugScreenPrintf("Taylor Swift\n");
+    pspDebugScreenPrintf("Olivia Rodrigo\n");
+    pspDebugScreenPrintf("Capitao Fausto\n");
+    pspDebugScreenPrintf("Luis Severo\n\n");
+
+    pspDebugScreenPrintf("BIO:\n");
+    pspDebugScreenPrintf("Lembram-se daquela \nvez em que...\n\n");
+    graph::swapBuffers();
+    graph::drawRect(SCREEN_WIDTH/2,0, SCREEN_WIDTH/2,SCREEN_HEIGHT, BLUE_LIGHT);
+    myPlayer.draw(xii, yii, 1);
+    graph::swapBuffers();
+
+    sleep(15);
     return;
 }

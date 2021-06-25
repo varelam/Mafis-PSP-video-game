@@ -4,8 +4,6 @@
 #define SCREEN_WIDTH 480
 #define SCREEN_HEIGHT 270
 
-#include <cstdint>
-
 // Colors
 #define RED 0x0A038E
 #define RED_LIGHT 0x1225FF
