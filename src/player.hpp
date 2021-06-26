@@ -4,10 +4,20 @@
 #include "mafis.hpp"
 #include "graph.hpp"
 #include <cstdint>
+#include <pspdebug.h>
+#include <pspctrl.h>
 
 class player {       // The class
   public:             // Access specifier
     
+    int xi; // pos x
+    int yi; // pos y
+    int vx; // vel x
+    int vy; // vel y
+    int scale; // drawing scale
+    int dir;  // face direction
+    int acc;  // gravity acceleration
+
     uint32_t hairColor;
     uint32_t headColor;
     uint32_t torsoColor;
@@ -16,9 +26,16 @@ class player {       // The class
     uint32_t shoeColor;
     
     // Constructor
-    player(int hairIdx, int headIdx, int torsoIdx, int armsIdx, int legsIdx, int shoeIdx);
+    player(int x0, int y0, int scale0, uint32_t hairIdx, uint32_t headIdx, uint32_t torsoIdx, uint32_t armsIdx, uint32_t legsIdx, uint32_t shoeIdx);
     void updateColor(int *bodyColors);
-    void draw(uint32_t xi, uint32_t yi, uint32_t scale);
+    void setPos(int x0, int y0, int scale0);
+    void setVel(int vx0, int vy0);
+    void setGravity(int g0);
+    void updatePos();
+    void updateVel(int vxi, int vyi);
+    void slowDown();
+    void draw();
+    int moveAround();
 };
 
 #endif

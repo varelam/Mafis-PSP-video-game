@@ -34,14 +34,14 @@ auto main() -> int
   // State02();
 
   // Create a player
-  player myPlayer(0,0,0,0,0,0);
+  player myPlayer(100,100,2,15,3,2,3,10,0);
 
   // Screen begins
   graph::init();
 
   // Levels!
   State03(myPlayer);
-  /// State04(myPlayer);
+  State04(myPlayer);
 
   sceKernelExitGame();	
 }

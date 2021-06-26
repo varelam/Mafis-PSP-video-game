@@ -4,17 +4,22 @@ void State03(player &myPlayer)
 {
     int bodyIdx = 0;
     int bodyColors[6] = {15,3,2,3,10,0};
-    uint32_t xii = SCREEN_WIDTH/2;
-    uint32_t yii = SCREEN_HEIGHT/2 + 80;
+    int scaleii = 1;
+    int xii = SCREEN_WIDTH/2;
+    int yii = SCREEN_HEIGHT/2 + 80;
+
+    // Set player properties for this level
+    myPlayer.setPos(xii,yii,scaleii);
     myPlayer.updateColor(bodyColors);
 
     // Printf in Debug Sreen
     pspDebugScreenPrintf("Vamos comecar por personalizar o teu jogador!\n");
     pspDebugScreenPrintf("Usa as setas para escolher a cor, prime X para avancar!");
     graph::clearKeep(20, BLUE_LIGHT);
-    myPlayer.draw(xii,yii,1);
+    myPlayer.draw();
     graph::swapBuffers();
     
+    return;
     
     struct timespec delay;
     delay.tv_sec = 0;
@@ -66,7 +71,7 @@ void State03(player &myPlayer)
         myPlayer.updateColor(bodyColors);
         graph::swapBuffers();
         graph::clearKeep(20, BLUE_LIGHT);
-        myPlayer.draw(xii, yii, 1);
+        myPlayer.draw();
         graph::swapBuffers();
         
 	    nanosleep(&delay, NULL);
@@ -75,7 +80,7 @@ void State03(player &myPlayer)
     pspDebugScreenClear();
     graph::swapBuffers();
     graph::clearKeep(20, BLUE_LIGHT);
-    myPlayer.draw(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 + 80, 1);
+    myPlayer.draw();
     graph::swapBuffers();
     pspDebugScreenPrintf("Estamos prontos para a nossa aventura!\n");
     sleep(2);
@@ -88,13 +93,13 @@ void State03(player &myPlayer)
     for (int i=0;i<50;i++) // Slide right for style
     {
         xii++;
-        // graph::clearKeep(20, BLUE_LIGHT);
+        myPlayer.setPos(xii,yii,scaleii);
         graph::clear(BLUE_LIGHT);
-        myPlayer.draw(xii, yii, 1);
+        myPlayer.draw();
         graph::swapBuffers();
         nanosleep(&delay, NULL);
     }
-    sleep(1);
+    sleep(3);
     pspDebugScreenPrintf("O MEU PERFIL:\n\n\n\n");
 
     pspDebugScreenPrintf("IDADE:\t22\n\n");
@@ -118,9 +123,10 @@ void State03(player &myPlayer)
     pspDebugScreenPrintf("Lembram-se daquela \nvez em que...\n\n");
     graph::swapBuffers();
     graph::drawRect(SCREEN_WIDTH/2,0, SCREEN_WIDTH/2,SCREEN_HEIGHT, BLUE_LIGHT);
-    myPlayer.draw(xii, yii, 1);
+    myPlayer.draw();
     graph::swapBuffers();
 
-    sleep(15);
+    sleep(2);
+    PressX();
     return;
 }

@@ -34,4 +34,12 @@
 
 #define NUM_COLORS 17
 
+#include <pspctrl.h>
+#include <pspkernel.h>
+#include <pspdebug.h>
+#include <time.h> // nanosleep
+
+void pspDelay();
+void PressX();
+
 #endif
