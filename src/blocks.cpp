@@ -7,7 +7,7 @@ block::block(int kind0)
     xi = -100;
     yi = -100;
     vx = 0;
-    vy = 2;
+    vy = 5;
     scale = 4;
 }
 
@@ -31,7 +31,7 @@ void block::update()
 void block::activate()
 {
     // Add Random position in x
-    xi = 40 + rand() % (SCREEN_WIDTH - 40);
+    xi = 20 + rand() % (SCREEN_WIDTH - 20);
     yi = 0;
     status = 1;
 }
@@ -39,8 +39,8 @@ void block::activate()
 void block::deactivate()
 {
     status = -1;
-    xi = -100;
-    yi = -100;
+    xi = 0;
+    yi = 0;
 }
 
 void block::drawWhisky()
@@ -68,7 +68,7 @@ void block::drawBagaco()
 
 void block::draw()
 {
-    if (status >0)
+    if (status > 0)
     {
         switch(kind)
         {
@@ -93,7 +93,6 @@ void block::draw()
             }
             break;
         }
-        
     }  
 }
 

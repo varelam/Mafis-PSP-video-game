@@ -1,10 +1,9 @@
-#include "04_levelFDUP.hpp"
+#include "04_tutorial.hpp"
 
+using namespace std;
 
-
-void IntroState04(player &myPlayer)
+void State04(player &myPlayer)
 {
-
     pspDebugScreenClear();
     pspDebugScreenPrintf("Bem-vinda ao teu maravilhoso Verao com migos!\n");
     graph::swapBuffers();
@@ -139,64 +138,4 @@ void IntroState04(player &myPlayer)
     PressX();
 
     return;
-}
-
-void State04(player &myPlayer)
-{
-    IntroState04(myPlayer);
-
-    myPlayer.setGravity(2);
-
-    // Generate blocks
-    int blockCounter = 0;
-    int maxBlocks = 1;
-    block oneBlock(rand() % 3);
-
-    // Measure time
-    clock_t t_start;
-    clock_t t_current;
-    double timeTaken;
-    t_start = clock();
-
-
-    // Force clear
-    graph::swapBuffers();
-    graph::clear(BLUE_LIGHT);
-    graph::swapBuffers();
-    graph::clear(BLUE_LIGHT);
-    myPlayer.setPos(SCREEN_WIDTH/2,SCREEN_HEIGHT,4);
-    myPlayer.draw();
-    graph::swapBuffers();
-
-    // Game loop
-    while(myPlayer.moveAround() >= 0)
-    {
-        t_current = clock();
-        timeTaken = ((double)(t_current - t_start))/CLOCKS_PER_SEC;
-        if(timeTaken > 2 && blockCounter < maxBlocks) // Regularly generate blocks
-        {
-            // blockCounter++;
-            oneBlock.activate();
-            blockCounter++;
-            // if(blockCounter>1){blockCounter=1;}
-        }
-
-        //for (int i = 0; i<blockCounter; i++)
-        //{
-            oneBlock.update();
-            if (oneBlock.yi > SCREEN_HEIGHT){oneBlock.deactivate();} 
-
-            bool colision = oneBlock.detectColision(myPlayer);
-            if(colision){return;}
-            
-            
-        //}
-        
-
-        graph::clearKeep(20, BLUE_LIGHT); 
-        oneBlock.draw();
-        myPlayer.draw();
-        graph::swapBuffers();
-    }
-    
 }

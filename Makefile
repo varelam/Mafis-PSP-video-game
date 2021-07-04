@@ -5,8 +5,8 @@ SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(SRC:.cpp=.o)
 
 CFLAGS   =              
-CXXFLAGS = $(CFLAGS) -std=c++14 -fno-rtti 
-ASFLAGS =  $(CFLAGS) 
+CXXFLAGS = $(CFLAGS) -std=c++14 -fno-rtti
+ASFLAGS =  $(CFLAGS)
 
 # PSP Stuff
 BUILD_PRX = 1

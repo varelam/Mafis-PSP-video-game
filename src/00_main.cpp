@@ -16,7 +16,8 @@ PSP_MODULE_INFO("PRENDAAA",0,1,0); // Version 1.0
 #include "01_psp_boot.hpp"
 #include "02_start.hpp"
 #include "03_intro.hpp"
-#include "04_levelFDUP.hpp"
+#include "04_tutorial.hpp"
+#include "05_77.hpp"
 
 auto main() -> int
 {
@@ -42,8 +43,7 @@ auto main() -> int
   // Levels!
   State03(myPlayer);
   State04(myPlayer);
-
-
+  State05(myPlayer);
 
   sceKernelExitGame();	
 }
