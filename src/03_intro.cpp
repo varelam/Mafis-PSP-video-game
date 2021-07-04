@@ -19,8 +19,11 @@ void State03(player &myPlayer)
     myPlayer.draw();
     graph::swapBuffers();
     
-    return;
-    
+
+    return; //////////////////////////////////////////////////////////////
+
+
+
     struct timespec delay;
     delay.tv_sec = 0;
     delay.tv_nsec = 3e8;
@@ -88,6 +91,14 @@ void State03(player &myPlayer)
     sleep(2);
     pspDebugScreenClear();
     sceDisplayWaitVblankStart();
+
+    // Force clear
+    graph::swapBuffers();
+    graph::clear(BLUE_LIGHT);
+    graph::swapBuffers();
+    graph::clear(BLUE_LIGHT);
+    graph::swapBuffers();
+
 
     delay.tv_nsec = 1e7;
     for (int i=0;i<50;i++) // Slide right for style
