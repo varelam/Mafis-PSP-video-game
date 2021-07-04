@@ -2,6 +2,7 @@
 #define __BLOCKS__
 
 #include "mafis.hpp"
+#include "player.hpp"
 #include "graph.hpp"
 #include <cstdint>
 #include <stdlib.h>
@@ -29,8 +30,9 @@ class block {       // The class
     void drawWhisky();    // kind > 3 Takes -1 health
     void drawWater();     // kind = 0 Gives health
     void drawSuperBock(); // kind = 1 Combo ready
+    void drawBagaco();    // kind = 2 Completes combo
     
-    // void drawBagaço();    // kind = 2 Completes combo
+    bool detectColision(player &myPlayer);
     // void drawRedbull();   // Gives you speed
     // void drawAbsinto(); // Instant death
     // void drawHidromel(); // Higher score

@@ -14,5 +14,6 @@
 
 void IntroState04(player &myPlayer);
 void State04(player &myPlayer);
+bool detectColision(player &myPlayer, block &oneBlock);
 
 #endif
