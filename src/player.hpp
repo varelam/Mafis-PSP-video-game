@@ -24,6 +24,9 @@ class player {       // The class
     uint32_t armsColor;
     uint32_t legsColor;
     uint32_t shoeColor;
+
+    int health;
+    int alcohol;
     
     // Constructor
     player(int x0, int y0, int scale0, uint32_t hairIdx, uint32_t headIdx, uint32_t torsoIdx, uint32_t armsIdx, uint32_t legsIdx, uint32_t shoeIdx);
@@ -34,8 +37,16 @@ class player {       // The class
     void updatePos();
     void updateVel(int vxi, int vyi);
     void slowDown();
+    void increaseHealth();
+    void decreaseHealth();
+    void increaseAlcohol();
+    void decreaseAlcohol();
     void draw();
+    void drawHealth();
+    void drawAlcohol();
+    void drawCombo();
     int moveAround();
+    void drawHitBox();
 };
 
 #endif

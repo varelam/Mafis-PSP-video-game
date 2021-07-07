@@ -4,11 +4,11 @@ player::player(int x0, int y0, int scale0, uint32_t hairIdx, uint32_t headIdx, u
 {
     uint32_t colorVec[NUM_COLORS] = {RED, RED_LIGHT, PINK, PINK_LIGHT, ORANGE, YELLOW, YELLOW_LIGHT, BROWN, GREEN, GREEN_LIGHT, BLUE, BLUE_LIGHT, PURPLE, GREY, GREY_LIGHT, BLACK, WHITE};
 
-    int xi = x0;
-    int yi = y0;
-    int vx = 0;
-    int vy = 0;
-    int scale = scale0;
+    xi = x0;
+    yi = y0;
+    vx = 0;
+    vy = 0;
+    scale = scale0;
     dir = 0;
     acc = 0;
     
@@ -18,6 +18,9 @@ player::player(int x0, int y0, int scale0, uint32_t hairIdx, uint32_t headIdx, u
     uint32_t armsColor  = colorVec[torsoIdx];
     uint32_t legsColor  = colorVec[legsIdx];
     uint32_t shoeColor  = colorVec[shoeIdx];
+
+    health  = 5;
+    alcohol = 0;
 }
 
 void player::setPos(int x0, int y0, int scale0)
@@ -68,6 +71,30 @@ void player::slowDown()
     if(vx<0){vx++;}
     if(vy>0){vy--;}
     if(vy<0){vy++;}
+}
+
+void player::increaseHealth()
+{
+    health++;
+    if(health > 5){health=5;}
+}
+
+void player::decreaseHealth()
+{
+    health--;
+    if(health < 0){health=0;}
+}
+
+void player::increaseAlcohol()
+{
+    alcohol++;
+    if(alcohol > 5){alcohol=5;}
+}
+
+void player::decreaseAlcohol()
+{
+    alcohol--;
+    if(alcohol < 0){alcohol=0;}
 }
 
 void player::updateColor(int *bodyColors)
@@ -149,4 +176,34 @@ int player::moveAround()
         updatePos();
         return result;
     }
+}
+
+void player::drawHealth()
+{
+    for (int i = 0; i<health ; i++)
+    {
+        graph::drawRect(5,SCREEN_HEIGHT-60 - i*10, 10, 5, RED_LIGHT);
+    }
+    
+}
+void player::drawAlcohol()
+{
+    for (int i = 0; i<alcohol ; i++)
+    {
+        graph::drawRect(25,SCREEN_HEIGHT-60 - i*10, 10, 5, YELLOW_LIGHT);
+    }
+}
+
+void player::drawCombo()
+{
+    graph::drawRect(45,SCREEN_HEIGHT-20 , 20, 20, GREEN_LIGHT);
+}
+
+void player::drawHitBox()
+{
+    int xp = 20; // Player half size, real size = 80 x 140
+    int yp = 70;
+    int xcp = xi + xp/scale; // Player hit box centroid
+    int ycp = yi - yp/scale;
+    graph::drawRect(xcp-xp/scale,ycp-yp/scale,2*xp/scale,2*yp/scale,PURPLE);
 }

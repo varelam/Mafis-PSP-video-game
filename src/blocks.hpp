@@ -24,6 +24,7 @@ class block {       // The class
     block(int kind0);
     void activate();
     void deactivate();
+    void increaseSpeed();
     void update();
     void draw();
 
@@ -32,7 +33,7 @@ class block {       // The class
     void drawSuperBock(); // kind = 1 Combo ready
     void drawBagaco();    // kind = 2 Completes combo
     
-    bool detectColision(player &myPlayer);
+    int detectColision(player &myPlayer);
     // void drawRedbull();   // Gives you speed
     // void drawAbsinto(); // Instant death
     // void drawHidromel(); // Higher score

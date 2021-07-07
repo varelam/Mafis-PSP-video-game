@@ -42,7 +42,7 @@ auto main() -> int
 
   // Levels!
   State03(myPlayer);
-  State04(myPlayer);
+  // State04(myPlayer);
   State05(myPlayer);
 
   sceKernelExitGame();	

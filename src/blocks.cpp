@@ -7,7 +7,7 @@ block::block(int kind0)
     xi = -100;
     yi = -100;
     vx = 0;
-    vy = 5;
+    vy = 1;
     scale = 4;
 }
 
@@ -41,6 +41,10 @@ void block::deactivate()
     status = -1;
     xi = 0;
     yi = 0;
+}
+void block::increaseSpeed()
+{
+    vy++;
 }
 
 void block::drawWhisky()
@@ -97,9 +101,9 @@ void block::draw()
 }
 
 
-bool block::detectColision(player &myPlayer)
+int block::detectColision(player &myPlayer)
 {
-    bool colision = false;
+    int colision = -1;
     int xp = 20; // Player half size, real size = 80 x 140
     int yp = 70;
     int xcp = myPlayer.xi + xp/myPlayer.scale; // Player hit box centroid
@@ -112,72 +116,68 @@ bool block::detectColision(player &myPlayer)
     int ycb;
     
     switch(kind)
+    {
+        case 0:
         {
-            case 0:
-            {
-                // Water 50 x 60
-                xb = 25;
-                yb = 30;
-            }
-            break;
-            case 1:
-            {
-                // SuperBock 40 x 120
-                xb = 20;
-                yb = 60;
-            }
-            break;
-            case 2:
-            {
-                // Bagaco 20 x 30
-                xb = 10;
-                yb = 15;
-            }
-            break;
-            default:
-            {
-                // Whisky 50 x 75
-                xb = 25;
-                yb = 75;
-            }
-            break;
+            // Water 50 x 60
+            xb = 25;
+            yb = 30;
         }
+        break;
+        case 1:
+        {
+            // SuperBock 40 x 120
+            xb = 20;
+            yb = 60;
+        }
+        break;
+        case 2:
+        {
+            // Bagaco 20 x 30
+            xb = 10;
+            yb = 15;
+        }
+        break;
+        default:
+        {
+            // Whisky 50 x 75
+            xb = 25;
+            yb = 75;
+        }
+        break;
+    }
 
-        xcb = xi + xb/scale;
-        ycb = yi + yb/scale;
+    xcb = xi + xb/scale;
+    ycb = yi + yb/scale;
 
-        // DEBUG COMMAND - show hit box
-        // graph::drawRect(xcb-xb/oneBlock.scale,ycb-yb/oneBlock.scale,2*xb/oneBlock.scale,2*yb/oneBlock.scale,WHITE);
-        // graph::drawRect(xcp-xp/myPlayer.scale,ycp-yp/myPlayer.scale,2*xp/myPlayer.scale,2*yp/myPlayer.scale,WHITE);
+    // Condition1: bottom left block corner is inside square
+    if( xcb - xb/scale > xcp - xp/myPlayer.scale && xcb - xb/scale < xcp + xp/myPlayer.scale &&
+        ycb + yb/scale < ycp + yp/myPlayer.scale && ycb + yb/scale > ycp - yp/myPlayer.scale) 
+    {
+        colision = kind;
+    }
+    // Condition2: bottom right block corner is inside square
+    else if( xcb + xb/scale > xcp - xp/myPlayer.scale && xcb + xb/scale < xcp + xp/myPlayer.scale &&
+        ycb + yb/scale < ycp + yp/myPlayer.scale && ycb + yb/scale > ycp - yp/myPlayer.scale) 
+    {
+        colision = kind;
+    }
+    // Condition3 : top left block corner is inside square
+    else if( xcb - xb/scale > xcp - xp/myPlayer.scale && xcb - xb/scale < xcp + xp/myPlayer.scale &&
+        ycb - yb/scale < ycp + yp/myPlayer.scale && ycb - yb/scale > ycp - yp/myPlayer.scale) 
+    {
+        colision = kind;
+    }
+    // Condition4 : top right block corner is inside square
+    else if( xcb + xb/scale > xcp - xp/myPlayer.scale && xcb + xb/scale < xcp + xp/myPlayer.scale &&
+        ycb - yb/scale < ycp + yp/myPlayer.scale && ycb - yb/scale > ycp - yp/myPlayer.scale) 
+    {
+        colision = kind;
+    }
+    else
+    {
+        colision = -1;
+    }
 
-        // Condition1: bottom left block corner enters first quadrant
-        if( xcb - xb/scale > xcp && xcb - xb/scale < xcp + xp/myPlayer.scale &&
-            ycb + yb/scale < ycp && ycb + yb/scale > ycp - yp/myPlayer.scale) 
-        {
-            colision = true;
-        }
-        // Condition2: bottom right block corner enters second quadrant
-        else if( xcb + xb/scale < xcp && xcb + xb/scale > xcp - xp/myPlayer.scale &&
-            ycb + yb/scale < ycp && ycb + yb/scale > ycp - yp/myPlayer.scale) 
-        {
-            colision = true;
-        }
-        // Condition3 : top left block corner enters fourth quadrant
-        else if( xcb - xb/scale > xcp && xcb - xb/scale < xcp + xp/scale &&
-            ycb - yb/scale > ycp && ycb - yb/scale < ycp + yp/scale) 
-        {
-            colision = true;
-        }
-        // Condition4 : top right block corner enters third quadrant
-        else if( xcb + xb/scale < xcp && xcb + xb/scale > xcp - xp/scale &&
-            ycb - yb/scale > ycp && ycb - yb/scale < ycp + yp/scale) 
-        {
-            colision = true;
-        }
-        else
-        {
-            colision = false;
-        }
-
-        return colision;
+    return colision;
 }
