@@ -4,12 +4,21 @@ using namespace std;
 
 void State04(player &myPlayer)
 {
+    int scaleii = 1;
+    int xii = SCREEN_WIDTH/2;
+    int yii = SCREEN_HEIGHT/2 + 80;
+
+    // Set player properties for this level
+    myPlayer.setPos(xii,yii,1);
+
+
     pspDebugScreenClear();
     pspDebugScreenPrintf("Bem-vinda ao teu maravilhoso Verao com migos!\n");
     graph::swapBuffers();
     graph::clearKeep(20, BLUE_LIGHT);
     myPlayer.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
     pspDelay();
     PressX();
 
@@ -20,6 +29,7 @@ void State04(player &myPlayer)
     graph::clearKeep(20, BLUE_LIGHT);
     myPlayer.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
     pspDelay();
     PressX();
     
@@ -83,6 +93,7 @@ void State04(player &myPlayer)
     superBottle.draw();
     bagacoBottle.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
     pspDelay();
     PressX();
 
@@ -99,6 +110,7 @@ void State04(player &myPlayer)
     superBottle.draw();
     bagacoBottle.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
     pspDelay();
     PressX();
 
@@ -109,6 +121,7 @@ void State04(player &myPlayer)
     graph::clearKeep(20, BLUE_LIGHT);
     myPlayer.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
     pspDelay();
     PressX();
 
@@ -122,6 +135,7 @@ void State04(player &myPlayer)
     whiskyBottle.draw();
     miniWhiskyBottle.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
     pspDelay();
     PressX();
 
@@ -134,6 +148,7 @@ void State04(player &myPlayer)
     waterBottle.draw();
     miniWaterBottle.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
     pspDelay();
     PressX();
 

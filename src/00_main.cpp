@@ -32,8 +32,8 @@ auto main() -> int
   sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
 
   // Start of the game print
-  // State02();
-
+  State02();
+ 
   // Create a player
   player myPlayer(100,100,2,15,3,2,3,10,0);
 
@@ -42,7 +42,7 @@ auto main() -> int
 
   // Levels!
   State03(myPlayer);
-  // State04(myPlayer);
+  State04(myPlayer);
   State05(myPlayer);
 
   sceKernelExitGame();	

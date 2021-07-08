@@ -2,7 +2,7 @@
 #define __MAFIS__
 
 #define SCREEN_WIDTH 480
-#define SCREEN_HEIGHT 270
+#define SCREEN_HEIGHT 272
 
 // Colors
 #define RED 0x0A038E

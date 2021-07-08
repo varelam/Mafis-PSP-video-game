@@ -24,13 +24,12 @@ void State05(player &myPlayer)
     t_start = clock();
 
     // Force clear
-    graph::swapBuffers();
-    graph::clear(BLUE_LIGHT);
-    graph::swapBuffers();
+    graph::init();
     graph::clear(BLUE_LIGHT);
     myPlayer.setPos(SCREEN_WIDTH/2,SCREEN_HEIGHT,4);
     myPlayer.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
     
     // Others
     myPlayer.setGravity(2);
@@ -122,13 +121,13 @@ void State05(player &myPlayer)
                         }
                         break;
                     }
-                
                 }
             }
-            
         }
         
+        
         // Draw stuff
+        graph::swapBuffers();
         graph::clear(BLUE_LIGHT);
         myPlayer.draw();
         myPlayer.drawHealth();
@@ -140,10 +139,11 @@ void State05(player &myPlayer)
         }
         // myPlayer.drawHitBox();
         graph::swapBuffers();
+        sceDisplayWaitVblankStart();
     }
     
     free(blocks);
-
+    
     pspDebugScreenClear();
     if(victory)
     {

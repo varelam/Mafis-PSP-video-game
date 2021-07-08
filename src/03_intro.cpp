@@ -20,9 +20,7 @@ void State03(player &myPlayer)
     graph::swapBuffers();
     
 
-    return; ////////////////////////////////////////////////////////////// DEBUG
-
-
+    // return; ////////////////////////////////////////////////////////////// DEBUG
 
     struct timespec delay;
     delay.tv_sec = 0;
@@ -76,6 +74,7 @@ void State03(player &myPlayer)
         graph::clearKeep(20, BLUE_LIGHT);
         myPlayer.draw();
         graph::swapBuffers();
+        sceDisplayWaitVblankStart();
         
 	    nanosleep(&delay, NULL);
     }
@@ -85,19 +84,17 @@ void State03(player &myPlayer)
     graph::clearKeep(20, BLUE_LIGHT);
     myPlayer.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
     pspDebugScreenPrintf("Estamos prontos para a nossa aventura!\n");
     sleep(2);
     pspDebugScreenPrintf("Tomei a liberdade de te criar um perfil no Tinder... \nPode dar mais jeito no futuro:\n");
     sleep(2);
-    pspDebugScreenClear();
-    sceDisplayWaitVblankStart();
 
     // Force clear
     graph::swapBuffers();
     graph::clear(BLUE_LIGHT);
     graph::swapBuffers();
-    graph::clear(BLUE_LIGHT);
-    graph::swapBuffers();
+    sceDisplayWaitVblankStart();
 
 
     delay.tv_nsec = 1e7;
@@ -109,8 +106,11 @@ void State03(player &myPlayer)
         myPlayer.draw();
         graph::swapBuffers();
         nanosleep(&delay, NULL);
+        sceDisplayWaitVblankStart();
     }
-    sleep(3);
+    sleep(2);
+
+    pspDebugScreenClear();
     pspDebugScreenPrintf("O MEU PERFIL:\n\n\n\n");
 
     pspDebugScreenPrintf("IDADE:\t22\n\n");
@@ -136,6 +136,7 @@ void State03(player &myPlayer)
     graph::drawRect(SCREEN_WIDTH/2,0, SCREEN_WIDTH/2,SCREEN_HEIGHT, BLUE_LIGHT);
     myPlayer.draw();
     graph::swapBuffers();
+    sceDisplayWaitVblankStart();
 
     sleep(2);
     PressX();
