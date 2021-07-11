@@ -21,6 +21,12 @@ player::player(int x0, int y0, int scale0, uint32_t hairIdx, uint32_t headIdx, u
 
     health  = 5;
     alcohol = 0;
+
+    levelAge = 0;
+    levelSign = 0;
+    levelPol = 0;
+    levelMusic = 0;
+    levelFunny = 0;
 }
 
 void player::setPos(int x0, int y0, int scale0)
@@ -125,6 +131,22 @@ void player::draw()
     graph::drawRect(xi + 3/scale + dir*5, yi -130/scale, 26/scale, 25/scale, headColor);
 }
 
+void player::drawBoy()
+{
+    // Draw Shoes
+    graph::drawRect(xi, yi, 40/scale, 10/scale, shoeColor);
+    // Draw Legs
+    graph::drawRect(xi + 10/scale, yi -50/scale, 20/scale, 50/scale, legsColor);
+    // Draw Hair
+    graph::drawRect(xi -7/scale, yi -140/scale, 54/scale, 40/scale, hairColor);
+    // Draw Arms
+    graph::drawRect(xi -5/scale, yi -90/scale, 50/scale, 40/scale, armsColor);
+    // Draw Torso
+    graph::drawRect(xi + 5/scale, yi -100/scale, 30/scale, 60/scale, torsoColor);
+    // Draw Face
+    graph::drawRect(xi + 3/scale + dir*5, yi -130/scale, 26/scale, 25/scale, headColor);
+}
+
 int player::moveAround()
 {
     int result = 0;
@@ -206,4 +228,153 @@ void player::drawHitBox()
     int xcp = xi + xp/scale; // Player hit box centroid
     int ycp = yi - yp/scale;
     graph::drawRect(xcp-xp/scale,ycp-yp/scale,2*xp/scale,2*yp/scale,PURPLE);
+}
+
+void player::randomizeLevels()
+{
+    levelAge =  (rand() % 3) - 1;
+    levelSign = (rand() % 3) - 1;
+    levelPol =  (rand() % 3) - 1;
+    levelMusic = (rand() % 3) - 1;
+    levelFunny = (rand() % 3) - 1;
+}
+
+
+void player::printBio()
+{
+    pspDebugScreenClear();
+    pspDebugScreenPrintf("O MEU PERFIL:\n\n\n\n");
+
+    if(levelAge>0)
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("IDADE:\t21\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("IDADE:\t22\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("IDADE:\t23\n\n\n\n");break;
+            default:pspDebugScreenPrintf("IDADE:\t24\n\n\n\n");break;
+            }
+        }
+    else if(levelAge <0)
+    {
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("IDADE:\t18\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("IDADE:\t27\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("IDADE:\t28\n\n\n\n");break;
+            default:pspDebugScreenPrintf("IDADE:\t29\n\n\n\n");break;
+            }
+        }
+    }
+    else
+    {
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("IDADE:\t19\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("IDADE:\t20\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("IDADE:\t25\n\n\n\n");break;
+            default:pspDebugScreenPrintf("IDADE:\t26\n\n\n\n");break;
+            }
+        }
+    }
+
+    pspDebugScreenPrintf("SIGNO SOLAR:\n");
+    if(levelSign>0)
+    {pspDebugScreenPrintf("Escorpiao\n\n\n\n");}
+    else if(levelSign <0)
+    {pspDebugScreenPrintf("Touro\n\n\n\n");}
+    else
+    {pspDebugScreenPrintf("Carneiro\n\n\n\n");}
+
+    pspDebugScreenPrintf("INTERESSES:\n");
+    if(levelPol>0)
+    {
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("Coisas techy\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("Acampar com os migos\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("Ir a manifs\n\n\n\n");break;
+            default:pspDebugScreenPrintf("Puppies\n\n\n\n");break;
+            }
+        }
+    }
+    else if(levelPol <0)
+    {
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("Ir ao gym\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("Saudades queima\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("Jantares do PSD\n\n\n\n");break;
+            default:pspDebugScreenPrintf("Jogos do FCP!!!\n\n\n\n");break;
+            }
+        }
+    }
+    else
+    {
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("Fumar esse\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("Jogar playstation\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("Ver bue anime\n\n\n\n");break;
+            default:pspDebugScreenPrintf("Chillar no McDonalds\n\n\n\n");break;
+            }
+        }
+    }
+
+
+    pspDebugScreenPrintf("SPOTIFY:\n");
+    if(levelMusic>0)
+    {
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("Taylor Swift\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("Rock, Indie e Jazz!\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("Ze Mario Branco\n\n\n\n");break;
+            default:pspDebugScreenPrintf("Tudo da Cuca Monga\n\n\n\n");break;
+            }
+        }
+    }
+    else if(levelMusic <0)
+    {
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("Arianna Grande\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("Piruka\n\n\n\n");;break;
+            case 2: pspDebugScreenPrintf("John Mayer\n\n\n\n");break;
+            default:pspDebugScreenPrintf("Justin Bieber\n\n\n\n");break;
+            }
+        }
+    }
+    else
+    {
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("Hip hop\n\n\n");break;
+            case 1: pspDebugScreenPrintf("Bandas do NOS Alive\n\n\n");break;
+            case 2: pspDebugScreenPrintf("Tame Impala\n\n\n");break;
+            default:pspDebugScreenPrintf("Queens of the Stone Age\n\n\n");break;
+            }
+        }  
+    }
+
+    pspDebugScreenPrintf("BIO:\n");
+    if(levelFunny>0)
+    {
+       {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("Alguem para partilhar um gelado\n\n");break;
+            case 1: pspDebugScreenPrintf("Companhia para concertos, alguem?\n\n");break;
+            case 2: pspDebugScreenPrintf("Nada como uma boa manif! BLM, LGBTQ+\n\n");break;
+            default:pspDebugScreenPrintf("Date na baixa ao por do sol?\n\n");break;
+            }
+        }   
+        
+    }
+    else if(levelFunny <0)
+    {
+        {switch ((rand() % 4))
+            {case 0: pspDebugScreenPrintf("Uma noite louca ;)\n\n");break;
+            case 1: pspDebugScreenPrintf("Nao sou como os outros homens\n\n");break;
+            case 2: pspDebugScreenPrintf("Nao mando msg primeiro\n\n");break;
+            default:pspDebugScreenPrintf("Somos um casal, queremos +1\n\n");break;
+            }
+        }   
+    }
+    else
+    {
+        pspDebugScreenPrintf("\n\n");
+
+    }
+    
+    graph::drawRect(SCREEN_WIDTH/2,0, SCREEN_WIDTH/2,SCREEN_HEIGHT, BLUE_LIGHT);
+    sceDisplayWaitVblankStart();
 }

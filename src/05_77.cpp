@@ -1,10 +1,13 @@
 #include "05_77.hpp"
-
-void State05(player &myPlayer)
+int State05(player &myPlayer)
 {
+    // Reset player health
+    myPlayer.health  = 5;
+    myPlayer.alcohol = 0;
+
     // Generate blocks
     int blockCounter = 0;
-    int maxBlocks = 1000;
+    int maxBlocks = 200;
 
     // PSP C++ does not support <vector> of objects so I will do
     // something very, very, very ugly. But hey it works
@@ -36,12 +39,12 @@ void State05(player &myPlayer)
     int colision;
     bool combo = false;
     bool exit = false;
-    bool victory = false;
+    int victory = -1;
 
     /////////////////////////////////////  Game loop  ///////////////////////////////////////
     while(!exit)
     {
-        if(myPlayer.moveAround()<0){exit=true;victory=false;}
+        if(myPlayer.moveAround()<0){exit=true;victory=1;}
 
         t_current = clock();
         timeTaken = ((double)(t_current - t_start))/CLOCKS_PER_SEC;
@@ -53,7 +56,7 @@ void State05(player &myPlayer)
             blockCounter++;
             t_start = t_current;
 
-            if(blockCounter == maxBlocks){exit=true;victory=false;}
+            if(blockCounter == maxBlocks){exit=true;victory=2;}
         }
 
         // Handle blocks
@@ -74,6 +77,7 @@ void State05(player &myPlayer)
                         {
                             // Water 50 x 60
                             myPlayer.increaseHealth();
+                            combo = false;
                         }
                         break;
                         case 1:
@@ -95,7 +99,7 @@ void State05(player &myPlayer)
                                 timeBlocks=timeBlocks - 0.10;
                                 if(myPlayer.alcohol>4)
                                 {
-                                    exit = true; victory = true;
+                                    exit = true; victory = 0;
                                 }
                             }
                             else
@@ -103,7 +107,7 @@ void State05(player &myPlayer)
                                 myPlayer.decreaseHealth();
                                 if(myPlayer.health < 1)
                                 {
-                                    exit = true; victory = false;
+                                    exit = true; victory = 3;
                                 }
                             }
                             combo = false;
@@ -115,7 +119,7 @@ void State05(player &myPlayer)
                             myPlayer.decreaseHealth();
                             if(myPlayer.health < 1)
                             {
-                                exit = true; victory = false;
+                                exit = true; victory = 3;
                             }
                             combo = false;
                         }
@@ -145,18 +149,24 @@ void State05(player &myPlayer)
     free(blocks);
     
     pspDebugScreenClear();
-    if(victory)
+
+    switch (victory)
     {
+    case 0:
         pspDebugScreenPrintf("B O A\n");
+        break;
+    case 1:
+        pspDebugScreenPrintf("Nao desistas ja!\n");
+        break;
+    case 2:
+        pspDebugScreenPrintf("Acabaste com o alcool todo do 77! \n");
+        break;
+    case 3:
+        pspDebugScreenPrintf("Ingeriste demasiado alcool mau! \n");
+        break;
+
+    default:
+        break;
     }
-    else
-    {
-        pspDebugScreenPrintf("Tenta outra vez...\n");
-    }
-    graph::swapBuffers();
-    graph::clearKeep(20, BLUE_LIGHT);
-    myPlayer.draw();
-    graph::swapBuffers();
-    pspDelay();
-    PressX();
+    return victory;
 }

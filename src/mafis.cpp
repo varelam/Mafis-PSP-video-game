@@ -27,3 +27,29 @@ void PressX()
     pspDelay();
 }
 
+bool PressXorC()
+{
+    SceCtrlData ctrlData;
+    bool b_exit = false;
+    bool b_result = false;
+
+    while(!b_exit)
+    {
+        // Read buttons
+        sceCtrlReadBufferPositive(&ctrlData, 1);
+
+        // Select cross
+        if(ctrlData.Buttons & PSP_CTRL_CROSS)
+        {
+            b_exit = true;
+            b_result = true;
+        }
+        else if(ctrlData.Buttons & PSP_CTRL_CIRCLE)
+        {
+            b_exit = true;
+            b_result = false;
+        }
+    }
+    pspDelay();
+    return(b_result);
+}

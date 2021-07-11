@@ -4,6 +4,7 @@
 #include "mafis.hpp"
 #include "graph.hpp"
 #include <cstdint>
+#include <stdlib.h>
 #include <pspdebug.h>
 #include <pspctrl.h>
 
@@ -27,6 +28,13 @@ class player {       // The class
 
     int health;
     int alcohol;
+
+    // Levels for Tinder game
+    int levelAge = 0;
+    int levelSign = 0;
+    int levelPol = 0;
+    int levelMusic = 0;
+    int levelFunny = 0;
     
     // Constructor
     player(int x0, int y0, int scale0, uint32_t hairIdx, uint32_t headIdx, uint32_t torsoIdx, uint32_t armsIdx, uint32_t legsIdx, uint32_t shoeIdx);
@@ -42,11 +50,15 @@ class player {       // The class
     void increaseAlcohol();
     void decreaseAlcohol();
     void draw();
+    void drawBoy();
     void drawHealth();
     void drawAlcohol();
     void drawCombo();
     int moveAround();
     void drawHitBox();
+
+    void randomizeLevels();
+    void printBio();
 };
 
 #endif

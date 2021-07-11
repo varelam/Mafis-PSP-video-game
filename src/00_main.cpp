@@ -8,6 +8,10 @@ PSP_MODULE_INFO("PRENDAAA",0,1,0); // Version 1.0
 // C++ includes
 #include <unistd.h> // sleep
 #include <cstdint>
+#include <stdlib.h>
+#include <cstdint>
+#include <unistd.h> // sleep
+#include <time.h> // nanosleep
 
 // Project
 #include "mafis.hpp"
@@ -18,6 +22,8 @@ PSP_MODULE_INFO("PRENDAAA",0,1,0); // Version 1.0
 #include "03_intro.hpp"
 #include "04_tutorial.hpp"
 #include "05_77.hpp"
+#include "06_tutorial2.hpp"
+#include "07_tinder.hpp"
 
 auto main() -> int
 {
@@ -32,18 +38,61 @@ auto main() -> int
   sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
 
   // Start of the game print
-  State02();
+  // State02();
  
   // Create a player
-  player myPlayer(100,100,2,15,3,2,3,10,0);
+  player myPlayer(100,100,1,15,3,2,3,10,0);
 
   // Screen begins
   graph::init();
 
   // Levels!
   State03(myPlayer);
-  State04(myPlayer);
-  State05(myPlayer);
+  // State04(myPlayer);
+
+  bool playAgain = true;
+  int victory;
+
+  while(playAgain)
+  {
+    victory = State05(myPlayer);
+    if(victory != 0 && victory != 1)
+    {
+      pspDebugScreenPrintf("Queres jogar outra vez?\n");
+      graph::swapBuffers();
+      graph::clearKeep(20, BLUE_LIGHT);
+      myPlayer.draw();
+      graph::swapBuffers();
+      pspDelay();
+
+      if(PressXorC())
+      {
+        playAgain = true;
+      }
+      else
+      {
+        playAgain = false;
+      }
+    }
+    else 
+    {
+      playAgain = false;
+      graph::swapBuffers();
+      graph::clearKeep(20, BLUE_LIGHT);
+      myPlayer.draw();
+      graph::swapBuffers();
+      pspDelay();
+      PressX();
+    }
+  }
+ 
+  if(victory != 0 && victory != 1)
+  {
+    sceKernelExitGame();
+  }
+
+  // State06(myPlayer);
+  State07(myPlayer);
 
   sceKernelExitGame();	
 }

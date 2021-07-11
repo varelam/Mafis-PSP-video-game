@@ -1,16 +1,14 @@
-#ifndef __05__
-#define __05__
+#ifndef __06__
+#define __06__
 
 #include "mafis.hpp"
 #include "graph.hpp"
 #include "player.hpp"
-#include "blocks.hpp"
-#include <stdlib.h>
 #include <unistd.h> // sleep
 #include <time.h> // nanosleep
 #include <pspdebug.h>
 #include <pspctrl.h>
 
-int State05(player &myPlayer);
+void State06(player &myPlayer);
 
 #endif

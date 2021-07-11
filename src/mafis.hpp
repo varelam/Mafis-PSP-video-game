@@ -41,5 +41,6 @@
 
 void pspDelay();
 void PressX();
+bool PressXorC();
 
 #endif
