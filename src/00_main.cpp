@@ -6,12 +6,12 @@
 PSP_MODULE_INFO("PRENDAAA",0,1,0); // Version 1.0
 
 // C++ includes
-#include <unistd.h> // sleep
+#include <unistd.h>
 #include <cstdint>
 #include <stdlib.h>
 #include <cstdint>
-#include <unistd.h> // sleep
-#include <time.h> // nanosleep
+#include <unistd.h>
+#include <time.h>
 
 // Project
 #include "mafis.hpp"
@@ -38,7 +38,7 @@ auto main() -> int
   sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
 
   // Start of the game print
-  // State02();
+  State02();
  
   // Create a player
   player myPlayer(100,100,1,15,3,2,3,10,0);
@@ -48,7 +48,7 @@ auto main() -> int
 
   // Levels!
   State03(myPlayer);
-  // State04(myPlayer);
+  State04(myPlayer);
 
   bool playAgain = true;
   int victory;
@@ -56,11 +56,12 @@ auto main() -> int
   while(playAgain)
   {
     victory = State05(myPlayer);
-    if(victory != 0 && victory != 1)
+    if(victory != 0)
     {
-      pspDebugScreenPrintf("Queres jogar outra vez?\n");
+      
       graph::swapBuffers();
       graph::clearKeep(20, BLUE_LIGHT);
+      pspDebugScreenPrintf("Queres jogar outra vez?\n");
       myPlayer.draw();
       graph::swapBuffers();
       pspDelay();
@@ -86,13 +87,47 @@ auto main() -> int
     }
   }
  
-  if(victory != 0 && victory != 1)
+  if(victory != 0)
   {
     sceKernelExitGame();
   }
 
-  // State06(myPlayer);
-  State07(myPlayer);
+  State06(myPlayer);
 
+  playAgain = true;
+  while(playAgain)
+  {
+    victory = State07(myPlayer);
+    if(victory < 0)
+    {
+      
+      graph::swapBuffers();
+      graph::clearKeep(20, WHITE);
+      pspDebugScreenPrintf("Queres jogar outra vez?\n");
+      myPlayer.draw();
+      graph::swapBuffers();
+      pspDelay();
+
+      if(PressXorC())
+      {
+        playAgain = true;
+      }
+      else
+      {
+        playAgain = false;
+      }
+    }
+    else 
+    {
+      playAgain = false;
+      graph::swapBuffers();
+      graph::clearKeep(20, WHITE);
+      pspDebugScreenPrintf("Boa! Conseguimos uma boa Tinder run! \n");
+      myPlayer.draw();
+      graph::swapBuffers();
+      pspDelay();
+      PressX();
+    }
+  }
   sceKernelExitGame();	
 }

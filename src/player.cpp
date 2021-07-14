@@ -375,6 +375,6 @@ void player::printBio()
 
     }
     
-    graph::drawRect(SCREEN_WIDTH/2,0, SCREEN_WIDTH/2,SCREEN_HEIGHT, BLUE_LIGHT);
+    graph::drawRect(SCREEN_WIDTH/2,0, SCREEN_WIDTH/2,SCREEN_HEIGHT, WHITE);
     sceDisplayWaitVblankStart();
 }

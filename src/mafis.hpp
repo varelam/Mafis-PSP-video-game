@@ -42,5 +42,6 @@
 void pspDelay();
 void PressX();
 bool PressXorC();
+int swipe();
 
 #endif

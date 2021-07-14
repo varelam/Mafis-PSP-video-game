@@ -11,6 +11,6 @@
 #include <pspdebug.h>
 #include <pspctrl.h>
 
-void State07(player &myPlayer);
+int State07(player &myPlayer);
 
 #endif

@@ -30,11 +30,11 @@ class player {       // The class
     int alcohol;
 
     // Levels for Tinder game
-    int levelAge = 0;
-    int levelSign = 0;
-    int levelPol = 0;
-    int levelMusic = 0;
-    int levelFunny = 0;
+    int levelAge;
+    int levelSign;
+    int levelPol;
+    int levelMusic;
+    int levelFunny;
     
     // Constructor
     player(int x0, int y0, int scale0, uint32_t hairIdx, uint32_t headIdx, uint32_t torsoIdx, uint32_t armsIdx, uint32_t legsIdx, uint32_t shoeIdx);
@@ -56,6 +56,7 @@ class player {       // The class
     void drawCombo();
     int moveAround();
     void drawHitBox();
+    
 
     void randomizeLevels();
     void printBio();

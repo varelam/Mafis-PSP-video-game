@@ -53,3 +53,45 @@ bool PressXorC()
     pspDelay();
     return(b_result);
 }
+
+int swipe()
+{
+    SceCtrlData ctrlData;
+    bool b_exit = false;
+    int result = 0;
+
+    while(!b_exit)
+    {
+        // Read buttons
+        sceCtrlReadBufferPositive(&ctrlData, 1);
+
+        // Select cross
+        if(ctrlData.Buttons & PSP_CTRL_RIGHT)
+        {
+            b_exit = true;
+            result = 5;
+        }
+        else if(ctrlData.Buttons & PSP_CTRL_LEFT)
+        {
+            b_exit = true;
+            result = -1;
+        }
+        else if(ctrlData.Buttons & PSP_CTRL_UP)
+        {
+            b_exit = true;
+            result = 20;
+        }
+        else if(ctrlData.Buttons & PSP_CTRL_DOWN)
+        {
+            b_exit = true;
+            result = -5;
+        }
+        else if(ctrlData.Buttons & PSP_CTRL_CIRCLE)
+        {
+            b_exit = true;
+            result = 0;
+        }
+    }
+    pspDelay();
+    return(result);
+}
