@@ -22,10 +22,10 @@ void State06(player &myPlayer)
     pspDelay();
     PressX();
 
+    // Set player properties for this level
     int scaleii = 1;
     int xii = SCREEN_WIDTH/2 + 50;
     int yii = SCREEN_HEIGHT/2 + 80;
-    // Set player properties for this level
     myPlayer.setPos(xii,yii,scaleii);
 
     pspDebugScreenClear();
@@ -40,9 +40,10 @@ void State06(player &myPlayer)
 
     pspDebugScreenClear();
     pspDebugScreenPrintf("E muito facil, so tens de dar swipe com as setas\n");
-    pspDebugScreenPrintf("aos meninos que aparecem e procurar um Manel\n");
+    pspDebugScreenPrintf("aos meninos que aparecem e procurar meninos\n");
     graph::swapBuffers();
     graph::clearKeep(20, WHITE);
+    myPlayer.switchDir();
     myPlayer.draw();
     graph::swapBuffers();
     sceDisplayWaitVblankStart();
@@ -54,6 +55,7 @@ void State06(player &myPlayer)
     pspDebugScreenPrintf("o algortimo vai-te empurrar para esse tipo de meninos\n");
     graph::swapBuffers();
     graph::clearKeep(20, WHITE);
+    myPlayer.switchDir();
     myPlayer.draw();
     graph::swapBuffers();
     sceDisplayWaitVblankStart();
@@ -65,6 +67,7 @@ void State06(player &myPlayer)
     pspDebugScreenPrintf("o algoritmo vai-te mostrar meninos meh\n");
     graph::swapBuffers();
     graph::clearKeep(20, WHITE);
+    myPlayer.switchDir();
     myPlayer.draw();
     graph::swapBuffers();
     sceDisplayWaitVblankStart();
@@ -76,6 +79,7 @@ void State06(player &myPlayer)
     pspDebugScreenPrintf("para mostrar meninos Mafalda ganhas o jogo!\n");
     graph::swapBuffers();
     graph::clearKeep(20, WHITE);
+    myPlayer.switchDir();
     myPlayer.draw();
     graph::swapBuffers();
     sceDisplayWaitVblankStart();
@@ -84,9 +88,22 @@ void State06(player &myPlayer)
 
     pspDebugScreenClear();
     pspDebugScreenPrintf("Mas se alinhares o algoritmo para meninos coco\n");
-    pspDebugScreenPrintf("vais ficar presa na dark zone do Tinder e perdes!\n");
+    pspDebugScreenPrintf("vais acabar por ficar sem meninos...\n");
     graph::swapBuffers();
     graph::clearKeep(20, WHITE);
+    myPlayer.switchDir();
+    myPlayer.draw();
+    graph::swapBuffers();
+    sceDisplayWaitVblankStart();
+    pspDelay();
+    PressX();
+
+    pspDebugScreenClear();
+    pspDebugScreenPrintf("Usa as setas para dar swipe!\n");
+    pspDebugScreenPrintf("Tens direito a um super like\n");
+    graph::swapBuffers();
+    graph::clearKeep(20, WHITE);
+    myPlayer.switchDir();
     myPlayer.draw();
     graph::swapBuffers();
     sceDisplayWaitVblankStart();
@@ -102,7 +119,4 @@ void State06(player &myPlayer)
     sceDisplayWaitVblankStart();
     pspDelay();
     PressX();
-
-
-    // int bodyColors[6] = {15,3,2,3,10,0};
 }

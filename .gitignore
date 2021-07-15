@@ -16,7 +16,7 @@
 !media/
 
 # Don't ignore binary executable
-!EBOOT.PSP
+!EBOOT.PBP
 
 # Don't ignore README
 !REAME.md

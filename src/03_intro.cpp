@@ -18,9 +18,6 @@ void State03(player &myPlayer)
     graph::clearKeep(20, BLUE_LIGHT);
     myPlayer.draw();
     graph::swapBuffers();
-    
-
-    // return; ////////////////////////////////////////////////////////////// DEBUG
 
     struct timespec delay;
     delay.tv_sec = 0;

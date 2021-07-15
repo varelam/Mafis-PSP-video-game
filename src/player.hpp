@@ -45,6 +45,7 @@ class player {       // The class
     void updatePos();
     void updateVel(int vxi, int vyi);
     void slowDown();
+    void switchDir();
     void increaseHealth();
     void decreaseHealth();
     void increaseAlcohol();

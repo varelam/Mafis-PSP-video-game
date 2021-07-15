@@ -24,6 +24,7 @@ PSP_MODULE_INFO("PRENDAAA",0,1,0); // Version 1.0
 #include "05_77.hpp"
 #include "06_tutorial2.hpp"
 #include "07_tinder.hpp"
+#include "08_end.hpp"
 
 auto main() -> int
 {
@@ -100,7 +101,6 @@ auto main() -> int
     victory = State07(myPlayer);
     if(victory < 0)
     {
-      
       graph::swapBuffers();
       graph::clearKeep(20, WHITE);
       pspDebugScreenPrintf("Queres jogar outra vez?\n");
@@ -129,5 +129,12 @@ auto main() -> int
       PressX();
     }
   }
+
+  if(victory <0)
+  {
+    sceKernelExitGame();
+  }
+
+  State08(myPlayer);
   sceKernelExitGame();	
 }

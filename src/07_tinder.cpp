@@ -21,6 +21,7 @@ int State07(player &myPlayer)
     int scaleii = 1;
     int xii = SCREEN_WIDTH/2 + 50;
     int yii = SCREEN_HEIGHT/2 + 80;
+    
     // Set player properties for this level
     myPlayer.setPos(xii,yii,scaleii);
 
@@ -31,7 +32,14 @@ int State07(player &myPlayer)
     int swipeValue = 0;
     bool superLike = true;
     bool exit = false;
-    bool victory = false;
+    int victory = 0;
+
+    // Misc counter
+    int boyCounter = 0;
+    int maxBoys = 40;
+
+    int likeCounter = 0;
+    int maxLikes = 15;
 
     while(!exit)
     {
@@ -68,7 +76,7 @@ int State07(player &myPlayer)
         int bodyColors[6] = {hairColor,skinColor ,clothesColor,clothesColor, pantsColor,shoeColor};
         someBoy.updateColor(bodyColors);
         someBoy.randomizeLevels();
-
+        someBoy.switchDir();
 
         // Draw
         graph::swapBuffers();
@@ -81,8 +89,13 @@ int State07(player &myPlayer)
 
         // Handle swipes
         int swipeValue = swipe();
-        if(swipeValue == 0){victory = false; exit = true;}
-        if(swipeValue>5){if(superLike){superLike=false;}else{swipeValue=5;pspDebugScreenPrintf("JA USASTE O SUPER LIKE!");}}
+        if(swipeValue == 0){victory = -1; exit = true;break;}
+        if(swipeValue>5)
+        {
+            likeCounter++;
+            if(superLike){superLike=false;}
+            else{swipeValue=5;pspDebugScreenPrintf("JA USASTE O SUPER LIKE!");}    
+        }
         score[0] += swipeValue*someBoy.levelAge;
         score[1] += swipeValue*someBoy.levelSign;
         score[2] += swipeValue*someBoy.levelPol;
@@ -91,9 +104,14 @@ int State07(player &myPlayer)
         for(int i=0;i<5; i++){if(score[i]<0){score[i]=0;}}
 
         // Check for game completion
-        victory = true;
-        for(int i=0;i<5; i++){if(score[i]<15){victory = false;}}
-        if(victory){exit = true;}
+        victory = 1;
+        for(int i=0;i<5; i++){if(score[i]<15){victory = 0;}}
+        if(victory>0){exit = true; break;}
+
+        // Counters
+        boyCounter++;
+        if(boyCounter > maxBoys){victory =-2; exit = true;}
+        if(likeCounter > maxLikes){victory =-3; exit = true;}
 
         // Draw swipe result
         graph::swapBuffers();
@@ -105,6 +123,23 @@ int State07(player &myPlayer)
         sceDisplayWaitVblankStart();
         pspDelay();
     }
+    pspDebugScreenClear();
 
-    if(victory){return 1;}else{return -1;}
+    switch (victory)
+    {
+    case 1:
+        pspDebugScreenPrintf("B O A\n");
+        break;
+    case -2:
+        pspDebugScreenPrintf("Acabaste com os meninos do Tinder!\n");
+        break;
+    case -3:
+        pspDebugScreenPrintf("Acabaste com os likes que tinhas disponiveis!\n");
+        break;
+    default:
+        pspDebugScreenPrintf("Saiste do jogo!\n");
+        break;
+    }
+
+    return victory;
 }

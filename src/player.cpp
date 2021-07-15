@@ -79,6 +79,11 @@ void player::slowDown()
     if(vy<0){vy++;}
 }
 
+void player::switchDir()
+{
+    if(dir>0){dir=0;}else{dir = 1;}
+}
+
 void player::increaseHealth()
 {
     health++;
@@ -246,71 +251,96 @@ void player::printBio()
     pspDebugScreenPrintf("O MEU PERFIL:\n\n\n\n");
 
     if(levelAge>0)
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("IDADE:\t21\n\n\n\n");break;
+    {   switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("IDADE:\t21\n\n\n\n");break;
             case 1: pspDebugScreenPrintf("IDADE:\t22\n\n\n\n");break;
             case 2: pspDebugScreenPrintf("IDADE:\t23\n\n\n\n");break;
             default:pspDebugScreenPrintf("IDADE:\t24\n\n\n\n");break;
-            }
         }
+    }
     else if(levelAge <0)
     {
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("IDADE:\t18\n\n\n\n");break;
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("IDADE:\t18\n\n\n\n");break;
             case 1: pspDebugScreenPrintf("IDADE:\t27\n\n\n\n");break;
             case 2: pspDebugScreenPrintf("IDADE:\t28\n\n\n\n");break;
             default:pspDebugScreenPrintf("IDADE:\t29\n\n\n\n");break;
-            }
         }
     }
     else
     {
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("IDADE:\t19\n\n\n\n");break;
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("IDADE:\t19\n\n\n\n");break;
             case 1: pspDebugScreenPrintf("IDADE:\t20\n\n\n\n");break;
             case 2: pspDebugScreenPrintf("IDADE:\t25\n\n\n\n");break;
             default:pspDebugScreenPrintf("IDADE:\t26\n\n\n\n");break;
-            }
         }
     }
 
     pspDebugScreenPrintf("SIGNO SOLAR:\n");
     if(levelSign>0)
-    {pspDebugScreenPrintf("Escorpiao\n\n\n\n");}
+    {   
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Touro\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("Escorpiao\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("Virgem\n\n\n\n");break;
+            default:pspDebugScreenPrintf("Peixes\n\n\n\n");break;
+        }    
+    }
     else if(levelSign <0)
-    {pspDebugScreenPrintf("Touro\n\n\n\n");}
-    else
-    {pspDebugScreenPrintf("Carneiro\n\n\n\n");}
+    {
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Carneiro\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("Aquario\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("Sagitario\n\n\n\n");break;
+            default:pspDebugScreenPrintf("Libra\n\n\n\n");break;
+        }   
+    }
+    else  
+    {
+        switch ((rand() % 4))
+        {   
+            case 0: pspDebugScreenPrintf("Gemeos\n\n\n\n");break;
+            case 1: pspDebugScreenPrintf("Leao\n\n\n\n");break;
+            case 2: pspDebugScreenPrintf("Capricornio\n\n\n\n");break;
+            default:pspDebugScreenPrintf("Caranguejo\n\n\n\n");break;
+        }
+    }
 
     pspDebugScreenPrintf("INTERESSES:\n");
     if(levelPol>0)
     {
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("Coisas techy\n\n\n\n");break;
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Coisas techy\n\n\n\n");break;
             case 1: pspDebugScreenPrintf("Acampar com os migos\n\n\n\n");break;
             case 2: pspDebugScreenPrintf("Ir a manifs\n\n\n\n");break;
             default:pspDebugScreenPrintf("Puppies\n\n\n\n");break;
-            }
         }
     }
     else if(levelPol <0)
     {
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("Ir ao gym\n\n\n\n");break;
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Ir ao gym\n\n\n\n");break;
             case 1: pspDebugScreenPrintf("Saudades queima\n\n\n\n");break;
             case 2: pspDebugScreenPrintf("Jantares do PSD\n\n\n\n");break;
             default:pspDebugScreenPrintf("Jogos do FCP!!!\n\n\n\n");break;
-            }
         }
     }
     else
     {
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("Fumar esse\n\n\n\n");break;
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Fumar esse\n\n\n\n");break;
             case 1: pspDebugScreenPrintf("Jogar playstation\n\n\n\n");break;
             case 2: pspDebugScreenPrintf("Ver bue anime\n\n\n\n");break;
             default:pspDebugScreenPrintf("Chillar no McDonalds\n\n\n\n");break;
-            }
         }
     }
 
@@ -318,55 +348,54 @@ void player::printBio()
     pspDebugScreenPrintf("SPOTIFY:\n");
     if(levelMusic>0)
     {
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("Taylor Swift\n\n\n\n");break;
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Taylor Swift\n\n\n\n");break;
             case 1: pspDebugScreenPrintf("Rock, Indie e Jazz!\n\n\n\n");break;
             case 2: pspDebugScreenPrintf("Ze Mario Branco\n\n\n\n");break;
             default:pspDebugScreenPrintf("Tudo da Cuca Monga\n\n\n\n");break;
-            }
         }
     }
     else if(levelMusic <0)
     {
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("Arianna Grande\n\n\n\n");break;
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Arianna Grande\n\n\n\n");break;
             case 1: pspDebugScreenPrintf("Piruka\n\n\n\n");;break;
             case 2: pspDebugScreenPrintf("John Mayer\n\n\n\n");break;
             default:pspDebugScreenPrintf("Justin Bieber\n\n\n\n");break;
-            }
         }
     }
     else
     {
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("Hip hop\n\n\n");break;
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Hip hop\n\n\n");break;
             case 1: pspDebugScreenPrintf("Bandas do NOS Alive\n\n\n");break;
             case 2: pspDebugScreenPrintf("Tame Impala\n\n\n");break;
             default:pspDebugScreenPrintf("Queens of the Stone Age\n\n\n");break;
-            }
         }  
     }
 
     pspDebugScreenPrintf("BIO:\n");
     if(levelFunny>0)
     {
-       {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("Alguem para partilhar um gelado\n\n");break;
+       switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Alguem para partilhar um gelado\n\n");break;
             case 1: pspDebugScreenPrintf("Companhia para concertos, alguem?\n\n");break;
             case 2: pspDebugScreenPrintf("Nada como uma boa manif! BLM, LGBTQ+\n\n");break;
             default:pspDebugScreenPrintf("Date na baixa ao por do sol?\n\n");break;
-            }
-        }   
-        
+        }       
     }
     else if(levelFunny <0)
     {
-        {switch ((rand() % 4))
-            {case 0: pspDebugScreenPrintf("Uma noite louca ;)\n\n");break;
+        switch ((rand() % 4))
+        {
+            case 0: pspDebugScreenPrintf("Uma noite louca ;)\n\n");break;
             case 1: pspDebugScreenPrintf("Nao sou como os outros homens\n\n");break;
             case 2: pspDebugScreenPrintf("Nao mando msg primeiro\n\n");break;
             default:pspDebugScreenPrintf("Somos um casal, queremos +1\n\n");break;
-            }
         }   
     }
     else
